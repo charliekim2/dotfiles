@@ -1,6 +1,7 @@
 return {
 	-- Syntax will not work if markdown treesitter is installed!!!
 	"vim-pandoc/vim-pandoc-syntax",
+	lazy = false,
 	ft = { "markdown" },
 	dependencies = {
 		"godlygeek/tabular",
@@ -13,8 +14,4 @@ return {
 		vim.keymap.set("v", "<leader>a:", ":Tab /:<cr>", { desc = "Align by colon" })
 		vim.keymap.set("v", "<leader>a=", ":Tab /=<cr>", { desc = "Align by equals" })
 	end,
-	-- "preservim/vim-markdown",
-	-- dependencies = {
-	-- 	"godlygeek/tabular",
-	-- },
 }
