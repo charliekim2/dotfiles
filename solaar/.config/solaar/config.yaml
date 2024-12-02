@@ -1,0 +1,21 @@
+- 1.1.8+dfsg-2
+- _NAME: Wireless Mouse MX Master 2S
+  _absent: [hi-res-scroll, lowres-scroll-mode, thumb-scroll-invert, thumb-scroll-mode, onboard_profiles, report_rate, pointer_speed, speed-change, backlight,
+    backlight-timed, fn-swap, persistent-remappable-keys, disable-keyboard-keys, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform,
+    gesture2-params, sidetone, equalizer]
+  _battery: 4096
+  _modelId: B01940690000
+  _sensitive: {divert-keys: false, dpi: false, gesture2-divert: false, gesture2-gestures: false, hires-smooth-invert: false, hires-smooth-resolution: ignore,
+    reprogrammable-keys: false, scroll-ratchet: false, smart-shift: false}
+  _unitId: 59BE0C97
+  change-host: null
+  divert-keys: {82: 0, 83: 0, 86: 0, 195: 2, 196: 0}
+  dpi: 800
+  gesture2-divert: {46: false}
+  gesture2-gestures: {45: true, 46: true}
+  hires-scroll-mode: false
+  hires-smooth-invert: false
+  hires-smooth-resolution: true
+  reprogrammable-keys: {80: 80, 81: 81, 82: 82, 83: 83, 86: 86, 195: 195, 196: 196}
+  scroll-ratchet: 1
+  smart-shift: 50

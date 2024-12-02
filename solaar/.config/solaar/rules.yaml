@@ -1,0 +1,30 @@
+%YAML 1.3
+---
+- Rule:
+  - And:
+    - Key: [Mouse Gesture Button, released]
+    - MouseGesture: []
+  - KeyPress:
+    - XF86_AudioPlay
+    - click
+- Rule:
+  - MouseGesture: Mouse Right
+  - KeyPress:
+    - XF86_AudioNext
+    - click
+- Rule:
+  - MouseGesture: Mouse Left
+  - KeyPress:
+    - XF86_AudioPrev
+    - click
+- Rule:
+  - MouseGesture: Mouse Up
+  - KeyPress:
+    - XF86_AudioRaiseVolume
+    - click
+- Rule:
+  - MouseGesture: Mouse Down
+  - KeyPress:
+    - XF86_AudioLowerVolume
+    - click
+...
