@@ -2,8 +2,7 @@
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_list\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e\x7e/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e\x7e/\x2econfig/fish/functions/nvm\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e\x7e/\x2econfig/fish/completions/nvm\x2efish
-SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/nvm\x2efish
+SETUVAR _fisher_plugins:jorgebucaran/fisher
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:666
 SETUVAR fish_color_cancel:\x2d\x2dreverse
@@ -44,4 +43,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d333
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/charlie/\x2elocal/protobuf/bin\x1e/home/charlie/go/bin\x1e/usr/local/go/bin\x1e/home/charlie/\x2elocal/bin\x1e/opt/nvim\x2dlinux64/bin
+SETUVAR fish_user_paths:/home/charlie/Downloads/zen\x2elinux\x2dspecific/zen\x1e/home/charlie/\x2elocal/protobuf/bin\x1e/home/charlie/go/bin\x1e/usr/local/go/bin\x1e/home/charlie/\x2elocal/bin\x1e/opt/nvim\x2dlinux64/bin

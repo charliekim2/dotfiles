@@ -1,7 +1,6 @@
 python
 go/air/templ
 erlang/elixir
-nvm
 zoxide
 nvim
 rustup
@@ -11,6 +10,7 @@ jetbrains mono NF
 brew
 git/gh
 fish
+fisher
 yarn
 fzf
 paperwm
@@ -18,3 +18,4 @@ ssh
 docker
 curl
 fastfetch
+pnpm + node
