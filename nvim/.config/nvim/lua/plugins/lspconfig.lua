@@ -28,26 +28,6 @@ return {
 		-- Add new filetypes
 		vim.filetype.add({ extension = { templ = "templ" } })
 
-		local custom_format = function()
-			vim.cmd("w")
-			if vim.bo.filetype == "templ" then
-				local bufnr = vim.api.nvim_get_current_buf()
-				local filename = vim.api.nvim_buf_get_name(bufnr)
-				local cmd = "templ fmt " .. vim.fn.shellescape(filename)
-
-				vim.fn.jobstart(cmd, {
-					on_exit = function()
-						-- Reload the buffer only if it's still the current buffer
-						if vim.api.nvim_get_current_buf() == bufnr then
-							vim.cmd("e!")
-						end
-					end,
-				})
-			else
-				vim.lsp.buf.format()
-			end
-		end
-
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)
 				lspconfig[server_name].setup({
@@ -64,7 +44,7 @@ return {
 			["emmet_ls"] = function()
 				lspconfig.emmet_ls.setup({
 					capabilities = capabilities,
-					filetypes = { "html", "css", "templ" },
+					filetypes = { "html", "css", "templ", "typescriptreact", "javascriptreact" },
 				})
 			end,
 			["clangd"] = function()
@@ -73,20 +53,19 @@ return {
 					filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }, -- exclude "proto"
 				})
 			end,
-			["templ"] = function()
-				lspconfig.templ.setup({
-					on_attach = function(client, bufnr)
-						local opts = { buffer = bufnr, remap = false }
-						-- other configuration options
-						vim.keymap.set("n", "<leader>lf", custom_format, opts)
-					end,
-					capabilities = capabilities,
-				})
-			end,
 			["tailwindcss"] = function()
 				lspconfig.tailwindcss.setup({
 					capabilities = capabilities,
-					filetypes = { "templ", "astro", "javascript", "typescript", "react", "html" },
+					filetypes = {
+						"templ",
+						"typescriptreact",
+						"javascriptreact",
+						"astro",
+						"javascript",
+						"typescript",
+						"react",
+						"html",
+					},
 					init_options = { userLanguages = { templ = "html" } },
 				})
 			end,
@@ -115,12 +94,7 @@ return {
 		-- Gleam setup, as it is not available on Mason
 		lspconfig.gleam.setup({})
 
-		-- local servers = { "pyright", "tsserver", "emmet_ls", "clangd", "gopls", "htmx", "html" }
-		-- for _, lsp in ipairs(servers) do
-		-- 	lspconfig[lsp].setup({
-		-- 		capabilities = capabilities,
-		-- 	})
-		-- end
+		vim.g.zig_fmt_autosave = 0
 
 		-- Global mappings.
 		-- See `:help vim.diagnostic.*` for documentation on any of the below functions

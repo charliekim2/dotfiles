@@ -25,29 +25,29 @@
     {
       "type": "kernel",
       "key": "",
-      "keyColor": "97" // White
+      "keyColor": "97" 
     },
     {
       "type": "packages",
       "key": "󰏗",
-      "keyColor": "38;5;208" // Keeping the same
+      "keyColor": "97"
     },
     {
       "type": "media",
       "key": "󰝚",
-      "keyColor": "31"
+      "keyColor": "97"
     },
 
     {
       "type": "uptime",
       "key": "",
-      "keyColor": "34"
+      "keyColor": "97"
     },
     "break",
     {
       "type": "title",
       "key": "",
-      "keyColor": "38;5;250" // Black
+      "keyColor": "97" // Black
     },
     {
       "type": "custom",
@@ -68,7 +68,7 @@
     {
       "type": "memory",
       "key": "",
-      "keyColor": "38;5;99" // Pinkish Purple
+      "keyColor": "97"
     },
     {
       "type": "custom",

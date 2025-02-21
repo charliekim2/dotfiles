@@ -6,15 +6,16 @@ return {
 	},
 	{
 		"rafi/awesome-vim-colorschemes",
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("minimalist")
-		end,
+		lazy = true,
+		event = "ColorSchemePre",
 	},
 	{
 		"zenbones-theme/zenbones.nvim",
 		dependencies = { "rktjmp/lush.nvim" },
-		lazy = true,
-		event = "ColorSchemePre",
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("kanagawabones")
+			vim.cmd.set("background:dark")
+		end,
 	},
 }
