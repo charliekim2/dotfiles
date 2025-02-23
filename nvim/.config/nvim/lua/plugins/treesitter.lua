@@ -3,16 +3,16 @@ return {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
+	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "lua" },
+			ensure_installed = { "lua", "go", "zig" },
 			sync_install = false,
-			auto_install = true,
-			ignore_install = {},
-			modules = {}, -- Suppress missing field diagnostic
+			auto_install = false,
 
 			highlight = {
 				enable = true,
+				additional_vim_regex_highlighting = false,
 			},
 			incremental_selection = {
 				enable = true,
@@ -109,7 +109,6 @@ return {
 			},
 		})
 		vim.wo.foldmethod = "expr"
-		vim.wo.foldlevel = 99
 		vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")

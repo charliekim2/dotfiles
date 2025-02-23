@@ -3,7 +3,7 @@ if status is-interactive
 end
 
 set --universal pure_enable_single_line_prompt true
-set --universal pure_color_mute white
+# set --universal pure_color_mute white
 
 alias py="python3"
 

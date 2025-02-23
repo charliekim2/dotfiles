@@ -20,6 +20,5 @@ return {
 				timeout_ms = 500,
 			},
 		})
-		vim.g.zig_fmt_autosave = 0 -- Prevent zigfmt bug that writes shell startup to buffer
 	end,
 }

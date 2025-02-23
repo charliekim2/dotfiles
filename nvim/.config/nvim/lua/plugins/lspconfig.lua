@@ -20,6 +20,9 @@ return {
 			local lspconfig = require("lspconfig")
 
 			vim.filetype.add({ extension = { templ = "templ" } }) -- Add templ filetype
+			vim.g.zig_fmt_autosave = 0 -- Prevent zigfmt bug that writes shell startup to buffer
+			vim.g.zig_fmt_parse_errors = 0
+
 			mlsp.setup()
 			mlsp.setup_handlers({
 				function(server_name)
@@ -29,6 +32,17 @@ return {
 				end,
 
 				-- Manually configure filetypes
+				["zls"] = function()
+					lspconfig.zls.setup({
+						capabilities = capabilities,
+						settings = {
+							zls = {
+								semantic_tokens = "partial",
+								enable_build_on_save = true,
+							},
+						},
+					})
+				end,
 				["emmet_ls"] = function()
 					lspconfig.emmet_ls.setup({
 						capabilities = capabilities,
