@@ -1,12 +1,8 @@
 # WINDOW
 hide_window_decorations yes
-enabled_layouts tall 
+enabled_layouts tall
 
 # FONTS
-font_family      family="ZedMono Nerd Font"
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
 font_size 18.0
 
 # BACKGROUND
@@ -21,6 +17,14 @@ shell_integration no-cursor
 map alt+r load_config_file
 
 # BEGIN_KITTY_THEME
-# Falcon
+# Gruvbox Material Dark Hard
 include current-theme.conf
 # END_KITTY_THEME
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Victor Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
