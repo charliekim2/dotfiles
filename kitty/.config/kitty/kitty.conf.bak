@@ -17,7 +17,7 @@ shell_integration no-cursor
 map alt+r load_config_file
 
 # BEGIN_KITTY_THEME
-# Gruvbox Material Dark Hard
+# Square
 include current-theme.conf
 # END_KITTY_THEME
 

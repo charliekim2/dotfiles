@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set --universal pure_enable_single_line_prompt true
+# https://pure-fish.github.io/pure/components/colours/
 # set --universal pure_color_mute white
 
 alias py="python3"
