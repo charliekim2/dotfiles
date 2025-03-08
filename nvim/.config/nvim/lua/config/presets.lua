@@ -1,5 +1,8 @@
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+vim.opt.wrap = true
+vim.opt.breakindent = true
+vim.opt.linebreak = true
 
 vim.cmd([[highlight iCursor guifg=white guibg=green]])
 vim.cmd([[highlight vCursor guifg=white guibg=red]])
