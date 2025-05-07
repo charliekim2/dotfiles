@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1epure\x2dfish/pure
 SETUVAR _fisher_pure_2D_fish_2F_pure_files:\x7e/\x2econfig/fish/functions/_pure_check_availability\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_check_for_new_release\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_detect_container_by_cgroup_method\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_detect_container_by_pid_method\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_format_time\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_get_prompt_symbol\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_is_inside_container\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_is_single_line_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_k8s_context\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_k8s_namespace\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_parse_directory\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_parse_git_branch\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_place_iterm2_prompt_mark\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prefix_root_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_print_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_print_prompt_rows\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_aws_profile\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_beginning\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_command_duration\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_container\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_current_folder\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_ending\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_first_line\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_git\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_git_branch\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_git_dirty\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_git_pending_commits\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_git_stash\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_jobs\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_k8s\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_new_line\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_nixdevshell\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_ssh\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_symbol\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_system_time\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_vimode\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_prompt_virtualenv\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_set_color\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_set_default\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_string_width\x2efish\x1e\x7e/\x2econfig/fish/functions/_pure_user_at_host\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_greeting\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_prompt\x2efish\x1e\x7e/\x2econfig/fish/functions/fish_title\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/_pure_init\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/pure\x2efish
@@ -25,7 +25,7 @@ SETUVAR fish_color_option:\x1d
 SETUVAR fish_color_param:A0A0F0
 SETUVAR fish_color_quote:666A80
 SETUVAR fish_color_redirection:FAFAFA
-SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
@@ -44,7 +44,7 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/charlie/Downloads/zen\x2elinux\x2dspecific/zen\x1e/home/charlie/\x2elocal/protobuf/bin\x1e/home/charlie/go/bin\x1e/usr/local/go/bin\x1e/home/charlie/\x2elocal/bin\x1e/opt/nvim\x2dlinux64/bin
+SETUVAR fish_user_paths:/opt/nvim\x2dlinux\x2dx86_64/bin\x1e/home/charlie/Downloads/zen\x2elinux\x2dspecific/zen\x1e/home/charlie/\x2elocal/protobuf/bin\x1e/home/charlie/go/bin\x1e/usr/local/go/bin\x1e/home/charlie/\x2elocal/bin\x1e/opt/nvim\x2dlinux64/bin
 SETUVAR pure_begin_prompt_with_current_directory:true
 SETUVAR pure_check_for_new_release:false
 SETUVAR pure_color_at_sign:pure_color_mute

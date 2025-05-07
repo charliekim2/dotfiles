@@ -8,8 +8,8 @@ set --universal pure_enable_single_line_prompt true
 
 alias py="python3"
 
-fish_add_path /opt/nvim-linux64/bin
-fish_add_path /home/charlie/.local/bin 
+fish_add_path /opt/nvim-linux-x86_64/bin
+fish_add_path /home/charlie/.local/bin
 fish_add_path /usr/local/go/bin
 fish_add_path /home/charlie/go/bin
 fish_add_path /home/charlie/.local/protobuf/bin
