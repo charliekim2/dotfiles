@@ -7,63 +7,61 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			require("mason").setup({
 				ensure_installed = { "lua_ls" },
 			})
-			local mlsp = require("mason-lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 
 			vim.filetype.add({ extension = { templ = "templ" } }) -- Add templ filetype
 			vim.g.zig_fmt_autosave = 0 -- Prevent zigfmt bug that writes shell startup to buffer
 			vim.g.zig_fmt_parse_errors = 0
 
-			mlsp.setup()
-			mlsp.setup_handlers({
-				function(server_name)
-					lspconfig[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
+			local servers = {
+				lua_ls = {},
+				ts_ls = {},
+				html = {},
+				emmet_ls = {
+					filetypes = { "html", "css", "templ", "typescriptreact", "javascriptreact" },
+				},
+				tailwindcss = {
+					filetypes = {
+						"templ",
+						"typescriptreact",
+						"javascriptreact",
+						"javascript",
+						"typescript",
+						"react",
+						"html",
+					},
+					init_options = { userLanguages = { templ = "html" } },
+				},
+				clangd = {},
+				pyright = {},
+				zls = {
+					settings = {
+						zls = {
+							semantic_tokens = "partial",
+							enable_build_on_save = true,
+						},
+					},
+				},
+				gopls = {},
+				templ = {},
+				htmx = {},
+			}
 
-				-- Manually configure filetypes
-				["zls"] = function()
-					lspconfig.zls.setup({
-						capabilities = capabilities,
-						settings = {
-							zls = {
-								semantic_tokens = "partial",
-								enable_build_on_save = true,
-							},
-						},
-					})
-				end,
-				["emmet_ls"] = function()
-					lspconfig.emmet_ls.setup({
-						capabilities = capabilities,
-						filetypes = { "html", "css", "templ", "typescriptreact", "javascriptreact" },
-					})
-				end,
-				["tailwindcss"] = function()
-					lspconfig.tailwindcss.setup({
-						capabilities = capabilities,
-						filetypes = {
-							"templ",
-							"typescriptreact",
-							"javascriptreact",
-							"javascript",
-							"typescript",
-							"react",
-							"html",
-						},
-						init_options = { userLanguages = { templ = "html" } },
-					})
-				end,
+			for server, config in pairs(servers) do
+				vim.lsp.enable(server)
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				vim.lsp.config(server, config)
+			end
+
+			vim.diagnostic.config({
+				virtual_lines = true,
+				underline = true,
 			})
 
 			vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float)
