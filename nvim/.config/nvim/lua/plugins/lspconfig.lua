@@ -23,6 +23,7 @@ return {
 				lua_ls = {},
 				ts_ls = {},
 				html = {},
+				css = {},
 				emmet_ls = {
 					filetypes = { "html", "css", "templ", "typescriptreact", "javascriptreact" },
 				},
@@ -39,6 +40,7 @@ return {
 					init_options = { userLanguages = { templ = "html" } },
 				},
 				clangd = {},
+				-- ruff = {},
 				pyright = {},
 				zls = {
 					settings = {

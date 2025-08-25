@@ -10,6 +10,11 @@ return {
 		local actions = require("telescope.actions")
 
 		telescope.setup({
+			pickers = {
+				find_files = {
+					hidden = true,
+				},
+			},
 			extensions = {
 				fzf = {
 					fuzzy = true,

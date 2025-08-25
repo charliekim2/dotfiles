@@ -17,7 +17,9 @@ return {
 		require("mini.move").setup()
 
 		-- Movement
-		require("mini.ai").setup()
+		require("mini.ai").setup({
+			n_lines = 1000,
+		})
 		require("mini.jump").setup()
 		require("mini.bracketed").setup()
 
