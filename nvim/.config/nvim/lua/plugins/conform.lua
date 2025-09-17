@@ -14,6 +14,7 @@ return {
 				html = { "prettierd" },
 				json = { "prettierd" },
 				yaml = { "yamlfmt" },
+				sql = { "sqruff" },
 			},
 			format_on_save = {
 				lsp_format = "fallback",

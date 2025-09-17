@@ -39,7 +39,7 @@ return {
 		priority = 1000,
 		config = function()
 			vim.opt.background = "dark"
-			vim.cmd("colorscheme material-deep-ocean")
+			vim.cmd("colorscheme gruvbox-material")
 		end,
 	},
 }
