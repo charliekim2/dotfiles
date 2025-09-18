@@ -35,3 +35,6 @@ fastfetch
 #   set -gx PATH "$PNPM_HOME" $PATH
 # end
 # pnpm end
+
+# Created by `pipx` on 2025-09-10 18:06:20
+set PATH $PATH /Users/charliekim/.local/bin

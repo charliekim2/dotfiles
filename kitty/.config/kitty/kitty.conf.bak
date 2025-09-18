@@ -1,9 +1,10 @@
 # WINDOW
-hide_window_decorations yes
-enabled_layouts tall
+window_padding_width 4
+hide_window_decorations no
+enabled_layouts vertical
 
 # FONTS
-font_size 18.0
+font_size 17.0
 
 # BACKGROUND
 background_image_layout cscaled
@@ -23,7 +24,7 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="Maple Mono NF"
+font_family      family="Maple Mono"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
