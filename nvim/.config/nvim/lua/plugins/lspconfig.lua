@@ -21,7 +21,17 @@ return {
 
 			local servers = {
 				lua_ls = {},
-				ts_ls = {},
+				ts_ls = {
+					root_dir = require("lspconfig.util").root_pattern(
+						"package-lock.json",
+						"yarn.lock",
+						"pnpm-lock.yaml",
+						"bun.lockb",
+						"bun.lock"
+					),
+					single_file_support = false,
+				},
+				denols = {},
 				html = {},
 				css = {},
 				emmet_ls = {
@@ -54,12 +64,13 @@ return {
 				templ = {},
 				htmx = {},
 				postgres_lsp = {},
+				terraformls = {},
 			}
 
 			for server, config in pairs(servers) do
-				vim.lsp.enable(server)
 				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 				vim.lsp.config(server, config)
+				vim.lsp.enable(server)
 			end
 
 			vim.diagnostic.config({

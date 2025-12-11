@@ -37,9 +37,12 @@ return {
 	{
 		"marko-cerovac/material.nvim",
 		priority = 1000,
+	},
+	{
+		"projekt0n/github-nvim-theme",
+		priority = 1000,
 		config = function()
-			vim.opt.background = "dark"
-			vim.cmd("colorscheme gruvbox-material")
+			vim.cmd("colorscheme github_dark_default")
 		end,
 	},
 }

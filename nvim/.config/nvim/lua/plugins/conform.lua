@@ -14,7 +14,8 @@ return {
 				html = { "prettierd" },
 				json = { "prettierd" },
 				yaml = { "yamlfmt" },
-				sql = { "sqruff" },
+				sql = { "sleek" },
+				terraform = { "terraform_fmt" },
 			},
 			format_on_save = {
 				lsp_format = "fallback",

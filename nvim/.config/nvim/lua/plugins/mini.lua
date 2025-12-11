@@ -5,7 +5,7 @@ return {
 		-- Visual
 		require("mini.statusline").setup()
 		require("mini.trailspace").setup()
-		require("mini.notify").setup()
+		-- require("mini.notify").setup()
 		require("mini.diff").setup()
 
 		-- Text modification
