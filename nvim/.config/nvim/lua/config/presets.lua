@@ -1,3 +1,5 @@
+vim.g.loaded_python3_provider = 0
+
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.wrap = true

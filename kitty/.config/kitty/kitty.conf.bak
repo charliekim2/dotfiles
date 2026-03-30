@@ -4,7 +4,7 @@ hide_window_decorations no
 enabled_layouts vertical
 
 # FONTS
-font_size 17.0
+font_size 16.0
 
 # BACKGROUND
 background_image_layout cscaled
@@ -16,15 +16,16 @@ shell_integration no-cursor
 
 # KEYBINDS
 map alt+r load_config_file
+macos_option_as_alt both
 
 # BEGIN_KITTY_THEME
-# srcery
+# GitHub Dark
 include current-theme.conf
 # END_KITTY_THEME
 
 
 # BEGIN_KITTY_FONTS
-font_family      family="Menlo"
+font_family      family="Maple Mono"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
