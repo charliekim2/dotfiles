@@ -29,10 +29,6 @@ return {
 		"zenbones-theme/zenbones.nvim",
 		dependencies = { "rktjmp/lush.nvim" },
 		priority = 1000,
-		config = function()
-			vim.opt.background = "dark"
-			vim.cmd("colorscheme rosebones")
-		end,
 	},
 	{
 		"srcery-colors/srcery-vim",
@@ -41,5 +37,12 @@ return {
 	{
 		"marko-cerovac/material.nvim",
 		priority = 1000,
+	},
+	{
+		"projekt0n/github-nvim-theme",
+		priority = 1000,
+		config = function()
+			vim.cmd("colorscheme github_dark_default")
+		end,
 	},
 }

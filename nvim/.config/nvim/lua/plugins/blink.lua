@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	dependencies = { "rafamadriz/friendly-snippets" },
-	build = "cargo build --release",
+	version = "1.*",
 
 	opts = {
 		keymap = {
@@ -9,6 +9,7 @@ return {
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-l>"] = { "accept", "fallback" },
 		},
+		fuzzy = { implementation = "prefer_rust" },
 	},
 	opts_extend = { "sources.default" },
 }

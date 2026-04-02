@@ -21,8 +21,19 @@ return {
 
 			local servers = {
 				lua_ls = {},
-				ts_ls = {},
+				ts_ls = {
+					root_dir = require("lspconfig.util").root_pattern(
+						"package-lock.json",
+						"yarn.lock",
+						"pnpm-lock.yaml",
+						"bun.lockb",
+						"bun.lock"
+					),
+					single_file_support = false,
+				},
+				denols = {},
 				html = {},
+				css = {},
 				emmet_ls = {
 					filetypes = { "html", "css", "templ", "typescriptreact", "javascriptreact" },
 				},
@@ -39,6 +50,7 @@ return {
 					init_options = { userLanguages = { templ = "html" } },
 				},
 				clangd = {},
+				-- ruff = {},
 				pyright = {},
 				zls = {
 					settings = {
@@ -51,12 +63,14 @@ return {
 				gopls = {},
 				templ = {},
 				htmx = {},
+				postgres_lsp = {},
+				terraformls = {},
 			}
 
 			for server, config in pairs(servers) do
-				vim.lsp.enable(server)
 				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 				vim.lsp.config(server, config)
+				vim.lsp.enable(server)
 			end
 
 			vim.diagnostic.config({
@@ -79,7 +93,7 @@ return {
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "<leader>K", vim.lsp.buf.signature_help, opts)
 					vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
 					vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
 					vim.keymap.set("n", "<leader>wl", function()

@@ -5,7 +5,7 @@ return {
 		-- Visual
 		require("mini.statusline").setup()
 		require("mini.trailspace").setup()
-		require("mini.notify").setup()
+		-- require("mini.notify").setup()
 		require("mini.diff").setup()
 
 		-- Text modification
@@ -17,7 +17,9 @@ return {
 		require("mini.move").setup()
 
 		-- Movement
-		require("mini.ai").setup()
+		require("mini.ai").setup({
+			n_lines = 1000,
+		})
 		require("mini.jump").setup()
 		require("mini.bracketed").setup()
 
