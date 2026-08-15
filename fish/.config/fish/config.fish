@@ -38,3 +38,6 @@ fastfetch
 
 # Created by `pipx` on 2025-09-10 18:06:20
 set PATH $PATH /Users/charliekim/.local/bin
+
+# Added by `rbenv init` on Thu 25 Jun 2026 15:44:45 MDT
+status --is-interactive; and rbenv init - --no-rehash fish | source
