@@ -1,0 +1,33 @@
+%YAML 1.3
+# Gesture button (thumb button) -> media control.
+#
+# Requires the Mouse Gesture Button to be diverted to "Mouse Gestures"
+# (divert-keys 195 = 2), otherwise no MouseGesture notification is emitted.
+#
+# playerctl is used rather than KeyPress because Solaar's key injection does
+# not reach a Wayland compositor; playerctl talks MPRIS over D-Bus instead.
+#
+# The Up-/Down- diagonals are accepted too: Solaar classifies a drag as a
+# diagonal once it deviates ~30 degrees from horizontal, which is easy to do
+# with the thumb.
+---
+# press and release, no movement -> play/pause
+- MouseGesture: [Mouse Gesture Button]
+- Execute: [playerctl, play-pause]
+...
+---
+# hold and flick right -> next track
+- Or:
+  - MouseGesture: [Mouse Gesture Button, Mouse Right]
+  - MouseGesture: [Mouse Gesture Button, Mouse Up-right]
+  - MouseGesture: [Mouse Gesture Button, Mouse Down-right]
+- Execute: [playerctl, next]
+...
+---
+# hold and flick left -> previous track
+- Or:
+  - MouseGesture: [Mouse Gesture Button, Mouse Left]
+  - MouseGesture: [Mouse Gesture Button, Mouse Up-left]
+  - MouseGesture: [Mouse Gesture Button, Mouse Down-left]
+- Execute: [playerctl, previous]
+...

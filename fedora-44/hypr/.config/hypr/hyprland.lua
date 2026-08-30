@@ -151,6 +151,14 @@ hl.config({
         -- stops clicks from moving keyboard focus, which is too far.
         follow_mouse = 2,
         sensitivity  = 0,
+
+        -- NOTE: input.scroll_factor is deliberately NOT set here. The global
+        -- option only scales continuous/finger-source scroll (touchpads) --
+        -- it is a no-op for a notched wheel, which is all this machine has.
+        -- The per-device override below is what actually works. See MICE.
+
+        -- Vestigial: no touchpad is attached. Kept so a future laptop/hotplug
+        -- lands on the same (non-natural) direction as the mice.
         touchpad     = { natural_scroll = false },
     },
 
@@ -162,6 +170,43 @@ hl.config({
         no_warps = true,
     },
 })
+
+--------------
+---- MICE ----
+--------------
+-- Scroll distance per ratchet notch. The stock 1.0 moves the view far less
+-- per notch than macOS/Windows do, on both mice.
+--
+-- This MUST be set per-device: the global `input.scroll_factor` is applied
+-- only to finger-source (touchpad) scroll and silently does nothing for a
+-- wheel. Setting it globally reads back as `set: true` via hyprctl getoption
+-- while changing nothing you can feel, which is a confusing way to lose an
+-- hour.
+--
+-- Both mice enumerate as several nodes (the wireless dongles and the Razer's
+-- composite HID each add one), and the node the scroll events actually arrive
+-- on is not obvious, so every mouse node gets the factor.
+--
+-- Tune live, no reload -- `hyprctl keyword` does NOT work with the Lua
+-- parser, it needs eval:
+--   hyprctl eval 'hl.device({ name = "logitech-wireless-mouse-mx-master-2s-1", scroll_factor = 5.0 })'
+-- Re-list the nodes with: hyprctl devices
+local SCROLL_FACTOR = 4.0
+
+for _, dev in ipairs({
+    "razer-razer-viper-v2-pro",
+    "razer-razer-viper-v2-pro-mouse",
+    "razer-razer-viper-v2-pro-keyboard-1",  -- composite HID, still a mouse node
+    "2.4g-dongle-1",
+    "2.4g-dongle-3",
+    "logitech-wireless-mouse-mx-master-2s-1",
+}) do
+    hl.device({ name = dev, scroll_factor = SCROLL_FACTOR })
+end
+
+-- SmartShift on the MX Master 2S is deliberately left high (Solaar
+-- `smart-shift: 16`) so the wheel stays ratcheted rather than free-spinning.
+-- Fixing scroll distance is a job for the factor above, not for unratcheting.
 
 ---------------------
 ---- KEYBINDINGS ----
