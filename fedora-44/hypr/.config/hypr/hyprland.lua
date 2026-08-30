@@ -263,6 +263,30 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
+-- Move windows: rearranges the dwindle tree, i.e. the window travels to that
+-- side and re-splits the node it lands in. This is what reshapes the layout.
+hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + up",    hl.dsp.window.move({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + down",  hl.dsp.window.move({ direction = "down" }))
+
+-- Swap windows: geometry stays put, the two windows trade places. Use this when
+-- the shape of the layout is right but the wrong app is in the wrong slot.
+hl.bind(mainMod .. " + ALT + left",  hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + ALT + right", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + ALT + up",    hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + ALT + down",  hl.dsp.window.swap({ direction = "down" }))
+
+-- Split control (dwindle). SUPER+J flips the focused window's split between
+-- side-by-side and stacked; SUPER+SHIFT+J mirrors the two halves of that split.
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.layout("swapsplit"))
+
+-- Resize the focused window
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.resize({ x = -80, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.resize({ x =  80, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.resize({ x = 0, y = -80, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.resize({ x = 0, y =  80, relative = true }), { repeating = true })
+
 -- Workspaces
 for i = 1, 10 do
     local key = i % 10
