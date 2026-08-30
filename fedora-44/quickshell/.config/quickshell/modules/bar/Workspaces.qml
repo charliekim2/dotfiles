@@ -34,7 +34,9 @@ RowLayout {
             StyledText {
                 text: ws.modelData.name
                 color: ws.labelColor
-                font.bold: ws.active
+                // font.bold: false would force weight back to 400, below the
+                // Medium baseline every other label sits at.
+                font.weight: ws.active ? Font.Bold : Font.Medium
                 font.pixelSize: Theme.fsBody
             }
         }

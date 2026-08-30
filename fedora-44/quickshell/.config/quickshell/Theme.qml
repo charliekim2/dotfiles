@@ -101,12 +101,12 @@ Singleton {
     readonly property int cardRadius  : 12
 
     // ------------------------------------------------------------------ type
-    // Adwaita Sans is a fork of Inter — the de-facto UI sans of this whole
-    // corner of the ecosystem — but it ships with Fedora already, so the bar
-    // pulls in no font of its own. Same tall x-height and open apertures that
-    // keep it readable at the 12px this bar runs at, and it carries `tnum`
-    // for the tabular figures the clock and the percentages need.
-    readonly property string fontFamily : "Adwaita Sans"
+    // Noto Sans is what GTK is already set to (gtk-font-name), so the bar
+    // matches the apps under it rather than introducing a second UI sans.
+    // Ships with Fedora, stays readable at the 12px this bar runs at, and
+    // carries `tnum`/`lnum` for the tabular figures the clock and the
+    // percentages need.
+    readonly property string fontFamily : "IBM Plex Sans"
 
     // Material Icons Round — the rounded cut echoes the pill geometry.
     // This is NOT a Nerd Font, so glyphs are addressed by codepoint in

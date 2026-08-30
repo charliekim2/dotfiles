@@ -7,6 +7,7 @@ Text {
     color: Theme.text
     font.family: Theme.fontFamily
     font.pixelSize: Theme.fsBody
+    font.weight: Font.Medium           // 400 reads thin at 12px on this bar
     verticalAlignment: Text.AlignVCenter
     renderType: Text.NativeRendering   // hinted stems; a serif at 12px needs it
 }

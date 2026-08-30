@@ -29,10 +29,10 @@
 //  * Icon themes need QT_QPA_PLATFORMTHEME=qt6ct in the environment, or Qt
 //    searches only hicolor and image://icon/<name> never resolves.
 //
-//  * Fonts: Adwaita Sans (adwaita-sans-fonts) and Material Icons Round
-//    (material-icons-fonts). Both are dnf packages; see the README. Adwaita
-//    Sans is a fork of Inter, so the bar gets the usual UI sans without
-//    pulling in a font Fedora does not already ship.
+//  * Fonts: Noto Sans (google-noto-sans-fonts) and Material Icons Round
+//    (material-icons-fonts). Both are dnf packages; see the README. Noto
+//    Sans is also what the GTK config uses, so the bar and the apps under
+//    it share one UI sans.
 //
 import Quickshell
 import QtQuick
