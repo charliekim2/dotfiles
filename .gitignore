@@ -1,1 +1,7 @@
 .DS_Store
+
+# Backups written next to configs. Stow folds the package dirs, so
+# ~/.config/<pkg> IS this repo -- editor/script backups land in the tree.
+*.bak
+*.bak-*
+*~
