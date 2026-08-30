@@ -44,9 +44,17 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
     hl.exec_cmd("hypridle")
 
-    -- Solaar tray (manages the MX Master 2S; XDG autostart is not honoured
-    -- when Hyprland is launched from a TTY, so start it explicitly)
-    hl.exec_cmd("solaar --window=hide")
+    -- Solaar is deliberately NOT started here. It ships
+    -- /etc/xdg/autostart/solaar.desktop, which systemd-xdg-autostart-generator
+    -- runs as app-solaar@autostart.service -- already with --window=hide. This
+    -- session is SDDM + uwsm (wayland-wm@hyprland.desktop.service), so
+    -- graphical-session.target is reached and XDG autostart IS honoured; the
+    -- old "not honoured from a TTY" note no longer applies.
+    --
+    -- Starting it here as well gave two instances. The second one registers,
+    -- finds the first via GtkApplication's single-instance lock, and its run()
+    -- fires activate on the primary -> window.popup(). That is what forced the
+    -- window open at every login despite --window=hide being on both.
 end)
 
 -------------------------------
@@ -73,7 +81,7 @@ hl.env("GDK_BACKEND", "wayland,x11")
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 20,
+        gaps_out = 10,
         border_size = 2,
         col = {
             active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
