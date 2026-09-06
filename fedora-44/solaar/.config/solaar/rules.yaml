@@ -7,27 +7,77 @@
 # playerctl is used rather than KeyPress because Solaar's key injection does
 # not reach a Wayland compositor; playerctl talks MPRIS over D-Bus instead.
 #
-# The Up-/Down- diagonals are accepted too: Solaar classifies a drag as a
-# diagonal once it deviates ~30 degrees from horizontal, which is easy to do
-# with the thumb.
----
-# press and release, no movement -> play/pause
-- MouseGesture: [Mouse Gesture Button]
-- Execute: [playerctl, play-pause]
-...
+# Why TestBytes instead of the obvious `MouseGesture: [Mouse Gesture Button,
+# Mouse Right]`:
+#
+# Solaar splits a gesture into several movement records whenever the mouse
+# stops reporting for more than 200 ms mid-gesture (MouseGesturesXY.move_action
+# in logitech_receiver/settings_templates.py). Holding the thumb button down
+# before or after the flick, which is exactly how this gesture is performed,
+# very easily produces a second record: a drift of only ~1.7 mm is enough to
+# survive the int() truncation and be emitted as its own record.
+#
+# MouseGesture.evaluate ends with `return data_offset == len(data)`, so it only
+# matches when the recorded movement is consumed *exactly*. One stray drift
+# record and the rule silently does not fire. That made the swipes feel broken
+# while the plain press (no movement, so no records at all) kept working.
+#
+# So match on the raw notification instead. Payload is a sequence of big-endian
+# int16 packed by struct.pack("!Nh"):
+#
+#   [0:2]   initiating key CID   (195 = Mouse Gesture Button)
+#   [2:4]   record 1 type        (0 = movement, 1 = key press)
+#   [4:6]   record 1 dx
+#   [6:8]   record 1 dy
+#   [8:10]  record 2 type
+#   [10:12] record 2 dx
+#   [12:14] record 2 dy
+#
+# dx/dy are DPI-normalised to ~5.9 units per cm (raw/dpi*15), so |8| is about
+# 1.4 cm -- well above hand drift and well below a deliberate flick. Checking the
+# first two records covers drift-then-flick, flick-then-drift and
+# drift-flick-drift. TestBytes cannot address past byte 16, hence two records.
+#
+# Execute returns None, which makes the whole rule return None and stops Solaar
+# from evaluating any later rule, so these are first-match-wins: next and
+# previous are tested before the play/pause fallback.
 ---
 # hold and flick right -> next track
+- Feature: MOUSE GESTURE
+- TestBytes: [0, 2, 195, 195]
 - Or:
-  - MouseGesture: [Mouse Gesture Button, Mouse Right]
-  - MouseGesture: [Mouse Gesture Button, Mouse Up-right]
-  - MouseGesture: [Mouse Gesture Button, Mouse Down-right]
+  - And:
+    - TestBytes: [2, 4, 0, 0]
+    - TestBytes: [4, 6, 8, 32767]
+  - And:
+    - TestBytes: [8, 10, 0, 0]
+    - TestBytes: [10, 12, 8, 32767]
 - Execute: [playerctl, next]
 ...
 ---
 # hold and flick left -> previous track
+- Feature: MOUSE GESTURE
+- TestBytes: [0, 2, 195, 195]
 - Or:
-  - MouseGesture: [Mouse Gesture Button, Mouse Left]
-  - MouseGesture: [Mouse Gesture Button, Mouse Up-left]
-  - MouseGesture: [Mouse Gesture Button, Mouse Down-left]
+  - And:
+    - TestBytes: [2, 4, 0, 0]
+    - TestBytes: [4, 6, -32767, -8]
+  - And:
+    - TestBytes: [8, 10, 0, 0]
+    - TestBytes: [10, 12, -32767, -8]
 - Execute: [playerctl, previous]
+...
+---
+# press and release without a deliberate swipe -> play/pause
+# Horizontal swipes are already handled above; this only has to reject a
+# deliberate vertical swipe, which stays unbound as before.
+- Feature: MOUSE GESTURE
+- TestBytes: [0, 2, 195, 195]
+- Not:
+    Or:
+    - TestBytes: [6, 8, 8, 32767]
+    - TestBytes: [6, 8, -32767, -8]
+    - TestBytes: [12, 14, 8, 32767]
+    - TestBytes: [12, 14, -32767, -8]
+- Execute: [playerctl, play-pause]
 ...

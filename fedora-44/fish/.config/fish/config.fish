@@ -20,6 +20,10 @@ test -d "$HOME/.cargo/bin" && fish_add_path "$HOME/.cargo/bin"
 # fish_add_path /home/charlie/.local/protobuf/bin
 # fish_add_path /home/charlie/Downloads/zen.linux-specific/zen/
 
+# API keys and other sensitive values, kept outside this repo.
+# Not guarded by `status is-interactive` so non-interactive fish sees them too.
+test -r "$HOME/.secrets.fish" && source "$HOME/.secrets.fish"
+
 export EDITOR=nvim
 alias n="nvim"
 alias s="kitten ssh"
@@ -47,3 +51,7 @@ fish_add_path $HOME/go/bin
 
 # Added by `rbenv init` on Thu 25 Jun 2026 15:44:45 MDT
 command -q rbenv; and status --is-interactive; and rbenv init - --no-rehash fish | source
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/charliekim/.local/bin" $PATH

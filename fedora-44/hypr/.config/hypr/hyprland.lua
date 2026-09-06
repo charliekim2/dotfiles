@@ -175,7 +175,9 @@ hl.config({
 ---- MICE ----
 --------------
 -- Scroll distance per ratchet notch. The stock 1.0 moves the view far less
--- per notch than macOS/Windows do, on both mice.
+-- per notch than macOS/Windows do, so every mouse node gets a multiplier.
+-- They are not all the same value: the MX Master 2S runs at half the Razer's
+-- factor, because 4.0 scrolled too far per notch on it.
 --
 -- This MUST be set per-device: the global `input.scroll_factor` is applied
 -- only to finger-source (touchpad) scroll and silently does nothing for a
@@ -183,25 +185,28 @@ hl.config({
 -- while changing nothing you can feel, which is a confusing way to lose an
 -- hour.
 --
--- Both mice enumerate as several nodes (the wireless dongles and the Razer's
--- composite HID each add one), and the node the scroll events actually arrive
--- on is not obvious, so every mouse node gets the factor.
+-- The Razer spreads itself over several nodes (its composite HID adds one)
+-- and the node the scroll events actually arrive on is not obvious, so all
+-- of them get the factor. The MX Master 2S is simpler -- it pairs over
+-- Bluetooth, so it is exactly the one logitech-* node below. The
+-- 2.4g-dongle-* nodes belong to neither mouse (a third USB receiver,
+-- 05ac:024f); they keep the old factor because nothing asked otherwise.
 --
 -- Tune live, no reload -- `hyprctl keyword` does NOT work with the Lua
 -- parser, it needs eval:
 --   hyprctl eval 'hl.device({ name = "logitech-wireless-mouse-mx-master-2s-1", scroll_factor = 5.0 })'
 -- Re-list the nodes with: hyprctl devices
-local SCROLL_FACTOR = 4.0
+local SCROLL_FACTORS = {
+    ["razer-razer-viper-v2-pro"]               = 4.0,
+    ["razer-razer-viper-v2-pro-mouse"]         = 4.0,
+    ["razer-razer-viper-v2-pro-keyboard-1"]    = 4.0,  -- composite HID, still a mouse node
+    ["2.4g-dongle-1"]                          = 4.0,
+    ["2.4g-dongle-3"]                          = 4.0,
+    ["logitech-wireless-mouse-mx-master-2s-1"] = 2.0,  -- MX Master 2S, the Solaar mouse
+}
 
-for _, dev in ipairs({
-    "razer-razer-viper-v2-pro",
-    "razer-razer-viper-v2-pro-mouse",
-    "razer-razer-viper-v2-pro-keyboard-1",  -- composite HID, still a mouse node
-    "2.4g-dongle-1",
-    "2.4g-dongle-3",
-    "logitech-wireless-mouse-mx-master-2s-1",
-}) do
-    hl.device({ name = dev, scroll_factor = SCROLL_FACTOR })
+for dev, factor in pairs(SCROLL_FACTORS) do
+    hl.device({ name = dev, scroll_factor = factor })
 end
 
 -- SmartShift on the MX Master 2S is deliberately left high (Solaar

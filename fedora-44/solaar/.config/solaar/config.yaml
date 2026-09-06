@@ -10,7 +10,7 @@
     logivoice-nr-state, logivoice-ng-state, logivoice-comp-state, logivoice-deesser-state, logivoice-depopper-state, logivoice-limiter-state, logivoice-hpf-state,
     onboard_profiles, dpi_extended, gesture2-params]
   _battery: 4096
-  _config_cookie: [101, 207]
+  _config_cookie: [58, 215]
   _modelId: B01940690000
   _sensitive: {dpi: false, hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore}
   _unitId: 59BE0C97
