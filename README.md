@@ -4,7 +4,7 @@ Per-OS folders at the repo root. Each contains GNU Stow packages, so you stow
 from *inside* the folder for your machine — not from the repo root.
 
 ```
-macos/      fastfetch  fish  kitty  nvim
+macos/      fastfetch  fish  kitty  nvim  claude
 fedora-44/  fish  kitty  nvim  hypr  quickshell  qt6ct  gtk  solaar  claude
 ```
 
@@ -17,7 +17,7 @@ stow -t ~ fish kitty nvim hypr quickshell qt6ct gtk solaar claude
 
 # macOS
 cd ~/dotfiles/macos
-stow -t ~ fish kitty nvim fastfetch
+stow -t ~ fish kitty nvim fastfetch claude
 ```
 
 Stow refuses to link over an existing regular file. Remove the conflicting file
