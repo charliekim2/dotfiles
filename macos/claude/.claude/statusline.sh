@@ -35,7 +35,8 @@ while IFS= read -r line; do F+=("$line"); done < <(printf '%s' "$input" | jq -r 
   (.context_window.total_input_tokens // 0),
   (.context_window.context_window_size // 200000),
   (.rate_limits.five_hour.used_percentage // -1),
-  (.rate_limits.five_hour.resets_at // 0)
+  (.rate_limits.five_hour.resets_at // 0),
+  (.session_id // "")
 ')
 
 MODEL=${F[0]:-?}
@@ -46,6 +47,7 @@ CTX_TOK=${F[4]:-0}
 CTX_MAX=${F[5]:-200000}
 FIVE_PCT=${F[6]:--1}
 FIVE_RESET=${F[7]:-0}
+SESSION=${F[8]:-}
 
 COLS=${COLUMNS:-100}
 
@@ -130,6 +132,19 @@ C1_P="ctx ${CTX_BAR} ${CP}%"
 C1_C="${DIM}ctx${R} $(heat "$CP")${CTX_BAR}${R} ${CP}%"
 C2_P="$(tokens "$CTX_TOK")/$(tokens "$CTX_MAX")"
 C2_C="${DIM}${C2_P}${R}"
+
+# The status line is the only place Claude Code hands out context-window usage,
+# so leave a copy where the Stop hook can find it.  Best-effort in every sense:
+# nothing here may cost us the status line, so every step is guarded.
+if [ -n "$SESSION" ] && [ "$CTX_MAX" -gt 0 ] 2>/dev/null; then
+  ctx_dir=${CTX_GUARD_HOME:-$HOME/.claude/ctx-guard}/usage
+  ctx_sid=$(printf '%s' "$SESSION" | tr -cd 'A-Za-z0-9_-')
+  if [ -n "$ctx_sid" ] && mkdir -p "$ctx_dir" 2>/dev/null; then
+    printf 'pct=%s\ntokens=%s\nwindow=%s\n' "$CP" "$CTX_TOK" "$CTX_MAX" \
+      > "$ctx_dir/$ctx_sid.tmp" 2>/dev/null \
+      && mv -f "$ctx_dir/$ctx_sid.tmp" "$ctx_dir/$ctx_sid" 2>/dev/null
+  fi
+fi
 
 # rolling 5h window
 # rate_limits is absent for non-subscription auth and until the first API
