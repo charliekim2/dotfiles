@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# Claude Code on the personal account.  `claude` stays the work account.
+#
+# The personal account is its own CLAUDE_CONFIG_DIR, so it gets its own login,
+# history, projects, memory and settings.json.  On macOS the login lands in a
+# separate keychain item -- Claude Code suffixes the service name with a hash
+# of the config dir -- so it never touches the work credentials.
+#
+# First run creates the dir, links in the hooks, status line and skills from
+# this package, and seeds settings.json; claude then asks you to log in.  After
+# that the dir is yours: settings.json is never rewritten, and nothing in it is
+# version-controlled apart from the links.
+#
+#   claude-personal [claude args...]
+#   CLAUDE_PERSONAL_DIR=~/elsewhere claude-personal   # different dir
+set -euo pipefail
+
+dir=${CLAUDE_PERSONAL_DIR:-$HOME/.claude-personal}
+
+# This script is stowed into ~/.local/bin; follow the link back to the package.
+pkg=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/../.." && pwd)/.claude
+
+if [ ! -d "$dir" ]; then
+  mkdir -p "$dir"
+  echo "claude-personal: new profile at $dir -- log in with your personal account." >&2
+fi
+
+# Links are only created when missing, so anything you put there instead wins.
+link() {
+  [ -e "$dir/$1" ] || [ -L "$dir/$1" ] || ln -s "$pkg/$1" "$dir/$1"
+}
+mkdir -p "$dir/skills"
+link hooks
+link statusline.sh
+link skills/handoff
+
+# Seeded once.  Personal preferences from the work settings, minus the org
+# parts (auto-mode environment, plugins, connector policy).
+if [ ! -e "$dir/settings.json" ]; then
+  cat >"$dir/settings.json" <<EOF
+{
+  "env": {
+    "CTX_GUARD_HOME": "$dir/ctx-guard"
+  },
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Find(**)",
+      "Grep(**)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)"
+    ]
+  },
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "\"$dir/hooks/ctx-session-start.sh\"", "timeout": 10 } ] }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "\"$dir/statusline.sh\""
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5-1": { "effortLevel": "high" },
+    "claude-opus-5-5": { "effortLevel": "high" }
+  }
+}
+EOF
+fi
+
+export CLAUDE_CONFIG_DIR=$dir
+# Keep pending handoffs apart from the work sessions'.  Also set in settings.json for launches that bypass this.
+export CTX_GUARD_HOME=$dir/ctx-guard
+# An API key in the environment beats the OAuth login and would bill whichever
+# org it belongs to.
+unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN
+
+exec claude "$@"

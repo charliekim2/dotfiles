@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Write or update a handoff document so a fresh session can continue this work, and arm it so the next session picks it up automatically. Use when the context guard reports the budget is reached, before clearing a conversation mid-task, or whenever the user asks for a handoff.
+description: Write or update a handoff document so a fresh session can continue this work, and arm it so the next session picks it up automatically. Use before clearing a conversation mid-task, or whenever the user asks for a handoff.
 ---
 
 # Handoff
