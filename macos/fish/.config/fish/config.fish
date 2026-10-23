@@ -30,10 +30,10 @@ pyenv init - fish | source
 fastfetch
 
 # pnpm
-# set -gx PNPM_HOME "/home/charlie/.local/share/pnpm"
-# if not string match -q -- $PNPM_HOME $PATH
-#   set -gx PATH "$PNPM_HOME" $PATH
-# end
+set -gx PNPM_HOME "$HOME/Library/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
 # pnpm end
 
 # Created by `pipx` on 2025-09-10 18:06:20
