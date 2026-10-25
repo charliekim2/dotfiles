@@ -55,3 +55,6 @@ command -q rbenv; and status --is-interactive; and rbenv init - --no-rehash fish
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/charliekim/.local/bin" $PATH
+
+# Google Cloud SDK (fish equivalent of the path.bash.inc line in ~/.bashrc)
+test -f "$HOME/google-cloud-sdk/path.fish.inc" && source "$HOME/google-cloud-sdk/path.fish.inc"
