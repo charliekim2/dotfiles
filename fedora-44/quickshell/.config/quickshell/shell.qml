@@ -1,16 +1,18 @@
 //
-// Quickshell — bar, notifications and alt-tab switcher. Hyprland / Fedora 44.
+// Quickshell — bar, notifications, alt-tab switcher and keybind palette. Hyprland / Fedora 44.
 //
 // Layout of this config:
 //
 //   Theme.qml            palette and every metric        (singleton)
 //   Icons.qml            Material Icons codepoints       (singleton)
 //   components/          Pill, Icon, StyledText, SignalBars
-//   services/            Net, Peripherals, Audio, SysInfo, Notifs, Switcher
+//   services/            Net, Peripherals, Audio, SysInfo, Notifs, Switcher,
+//                        Keybinds
 //                        (all singletons)
 //   modules/bar/         the floating bar and its pills
 //   modules/notifications/  toasts, dropdown, shared card
 //   modules/switcher/    the alt-tab overlay
+//   modules/keybinds/    the SUPER+/ keybind cheat sheet
 //
 // Cross-cutting gotchas, learned the hard way — each is repeated in full at
 // the place it bites, but they are collected here so they are findable:
@@ -39,6 +41,7 @@ import QtQuick
 import qs.modules.bar
 import qs.modules.notifications
 import qs.modules.switcher
+import qs.modules.keybinds
 
 ShellRoot {
     // One bar per monitor.
@@ -52,4 +55,5 @@ ShellRoot {
     Toasts {}
     Panel {}
     SwitcherOverlay {}
+    KeybindPalette {}
 }

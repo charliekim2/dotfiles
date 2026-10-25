@@ -220,6 +220,8 @@ end
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
+-- Keep services/Keybinds.qml (the SUPER+/ cheat sheet) in step with this
+-- section: its list is curated by hand, not read back from hyprctl.
 local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
@@ -265,6 +267,9 @@ end, { repeating = true })
 
 -- notification dropdown
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call notifs toggle"))
+
+-- searchable keybind cheat sheet (quickshell)
+hl.bind(mainMod .. " + slash", hl.dsp.global("quickshell:keybinds"))
 
 -- Focus
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
